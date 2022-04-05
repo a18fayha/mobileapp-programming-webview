@@ -19,13 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private WebView myWebView;
 
 
-    public void showExternalWebPage(){
-        // TODO: Add your code for showing external web page here
-    }
-
-    public void showInternalWebPage(){
-        // TODO: Add your code for showing internal web page here
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.action_internal_web) {
             Log.d("==>","Will display internal web page");
-           // ShowInternalPage();
+           ShowInternalPage();
             return true;
         }
 
@@ -118,11 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    /*public void ShowInternalPage(){
+    public void ShowInternalPage(){
 
-        myWebView.loadUrl("file:///assets/myfiles/about.html");
+        myWebView.loadUrl("file:///android_asset/about.html");
 
     }
-  */
 
 }
