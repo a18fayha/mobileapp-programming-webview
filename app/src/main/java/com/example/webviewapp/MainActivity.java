@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -16,6 +17,8 @@ import androidx.appcompat.widget.Toolbar;
 public class MainActivity extends AppCompatActivity {
 
     private WebView myWebView;
+
+
     public void showExternalWebPage(){
         // TODO: Add your code for showing external web page here
     }
@@ -32,7 +35,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        WebViewClient myWebViewClient = new WebViewClient();
+
         myWebView = findViewById(R.id.myWebView);
+        myWebView.setWebViewClient(myWebViewClient);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+
+
+
 
         /*
         * Rename your App. Tip: Values->Strings
@@ -58,6 +68,8 @@ public class MainActivity extends AppCompatActivity {
            showing your App. One (1) screenshot showing your internal web page and
            one (1) screenshot showing your external web page.
         */
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -86,14 +98,31 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_external_web) {
             Log.d("==>","Will display external web page");
+            ShowExternalPage();
             return true;
+
         }
 
         if (id == R.id.action_internal_web) {
             Log.d("==>","Will display internal web page");
+           // ShowInternalPage();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void ShowExternalPage(){
+
+        myWebView.loadUrl("https://his.se");
+
+    }
+
+    /*public void ShowInternalPage(){
+
+        myWebView.loadUrl("file:///assets/myfiles/about.html");
+
+    }
+  */
+
 }
