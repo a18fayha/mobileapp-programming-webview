@@ -25,7 +25,7 @@
 
     `android:id="@+id/myWebView"`
  5. Skapade sedan en privat WebView instance variable i Main.activity.
-        `"private WebView myWebView;"´
+      `private WebView myWebView;`
  6. Den nyskapade instans variabeln instansierades i onCreate() och
     findViewByID metoden användes för att koppla det till det ID som Webviewn har.
  7.Skapade en ny WebClient och lade till min webview i den. Tillät sedan  javaScript exekvering till WebClient
@@ -50,8 +50,8 @@
         }
 ```
  9. Kallade på metoderna showExternalWebpage() och ShowInternalPage() i onOptionItemSelected(), där respektive metod kallas när de trycks på i dropdown menyn.ShowInternalPage
-
-```     if (id == R.id.action_external_web) {
+```
+  if (id == R.id.action_external_web) {
                 Log.d("==>","Will display external web page");
                 ShowExternalPage();
                 return true;
