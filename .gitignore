@@ -40,3 +40,5 @@ captures/
 
 # Other
 *.zip
+/.idea/*
+*.zip
