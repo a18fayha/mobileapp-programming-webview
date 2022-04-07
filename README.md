@@ -3,40 +3,69 @@
 
 **Skriv din rapport här!**
 
-_Du kan ta bort all text som finns sedan tidigare_.
 
-## Följande grundsyn gäller dugga-svar:
 
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
+1. Jag började uppgiften med att först forka github repositoryn webview och klonade den till min android project.
+2. Bytte namn på min application till ett valfritt namn.Detta gjordes i string.xml filen.
+   Enablade internet access till min App, vilket görs med kodsnittet nedan i manifest filen.
 
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
+    "<string name="app_name">MyApp</string>"
+    <uses-permission android:name="android.permission.INTERNET" />
+3. Skapade en layout fil genom att byta ut den existerande textview till en Webview.
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
-}
+    <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/myWebView"
+            android:text="WAGUAN BLOOD!"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+ 4. Gav den nya webviewen en id som senare ska användas för att referera till den. Detta görs med kodsnittet nedan som finns i  contetn_mail.xml filen
 
-![](android.png)
+    android:id="@+id/myWebView"
+ 5. Skapade sedan en privat WebView instance variable i Main.activity.
+        "private WebView myWebView;"
+ 6. Den nyskapade instans variabeln instansierades i onCreate() och
+    findViewByID metoden användes för att koppla det till det ID som Webviewn har.
+ 7.Skapade en ny WebClient och lade till min webview i den. Tillät sedan  javaScript exekvering till WebClient
 
-Läs gärna:
+        WebViewClient myWebViewClient = new WebViewClient();
+        myWebView.setWebViewClient(myWebViewClient);
+        myWebView.getSettings().setJavaScriptEnabled(true);
+ 8. Implementerade metoderna showInternalWebpage och showExternalWebpage genom att använda loadURl() metoden och sedan skicka antingen en intern fil eller en extern fil
+ i parametern.
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+    public void ShowExternalPage(){
+
+            myWebView.loadUrl("https://his.se");
+
+        }
+
+    public void ShowInternalPage(){
+
+            myWebView.loadUrl("file:///android_asset/about.html");
+
+        }
+ 9. Kallade på metoderna showExternalWebpage() och ShowInternalPage() i onOptionItemSelected(), där respektive metod kallas när de trycks på i dropdown menyn.ShowInternalPage
+
+     if (id == R.id.action_external_web) {
+                Log.d("==>","Will display external web page");
+                ShowExternalPage();
+                return true;
+
+            }
+     if (id == R.id.action_internal_web) {
+                 Log.d("==>","Will display internal web page");
+                ShowInternalPage();
+                 return true;
+             }
+
+
+![](ExternPage.png)
+![](InternalPage.png)
+
