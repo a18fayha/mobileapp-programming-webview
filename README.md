@@ -49,7 +49,7 @@
 
         }
 ```
- 9. Kallade på metoderna showExternalWebpage() och ShowInternalPage() i onOptionItemSelected(), där respektive metod kallas när de trycks på i dropdown menyn.ShowInternalPage
+ 9. Kallade på metoderna showExternalWebpage() och ShowInternalPage() i onOptionItemSelected(), där respektive metod kallas när de trycks på i dropdown menyn.
 ```
   if (id == R.id.action_external_web) {
                 Log.d("==>","Will display external web page");
